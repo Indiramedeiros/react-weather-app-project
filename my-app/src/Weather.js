@@ -37,7 +37,7 @@ export default function Weather() {
               <span className="units">
                 <a href="/">°C</a> ׀ <a href="/">°F</a>
               </span>
-              <p class="description">{weatherData.description}</p>
+              <p className="description">{weatherData.description}</p>
             </div>
             <div className="col-6">
               <ul>
@@ -53,7 +53,7 @@ export default function Weather() {
                   <input
                     type="text"
                     className="form-control"
-                    autofocus="on"
+                    autoFocus="on"
                     placeholder="Enter City"
                   />
                 </div>
