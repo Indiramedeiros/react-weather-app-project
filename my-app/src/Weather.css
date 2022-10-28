@@ -1,0 +1,29 @@
+.weather-app {
+  max-width: 700px;
+  display: block;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 50px;
+  border: 1px solid #83cee0;
+  font-family: "Lora", serif;
+}
+
+.Weather h1 {
+  padding: 15px;
+}
+
+.Weather li {
+  list-style: none;
+  font-size: 20px;
+}
+.Weather .current-temp {
+  font-size: 50px;
+}
+
+.Weather .units {
+  position: relative;
+  top: -24px;
+}
+.Weather .description {
+  font-size: 20px;
+}
