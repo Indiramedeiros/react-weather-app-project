@@ -71,8 +71,45 @@ export default function Weather() {
               </div>
             </div>
           </div>
+          <div className="row mt-5">
+            <div className="col">
+              <img src={weatherData.imgUrl} alt="clear"></img>
+              <h3>Sat</h3>
+              <h3>20°C</h3>
+            </div>
+            <div className="col">
+              <img src={weatherData.imgUrl} alt="clear"></img>
+              <h3>Sun</h3>
+              <h3>20°C</h3>
+            </div>
+            <div className="col">
+              <img src={weatherData.imgUrl} alt="clear"></img>
+              <h3>Mon</h3>
+              <h3>20°C</h3>
+            </div>
+            <div className="col">
+              <img src={weatherData.imgUrl} alt="clear"></img>
+              <h3>Tue</h3>
+              <h3>20°C</h3>
+            </div>
+            <div className="col">
+              <img src={weatherData.imgUrl} alt="clear"></img>
+              <h3>Wed</h3>
+              <h3>20°C</h3>
+            </div>
+          </div>
         </div>
       </div>
+      <small className="my-link ">
+        <a
+          href="https://github.com/Indiramedeiros/weather-app-final"
+          target="_blank"
+          rel="noreferrer"
+        >
+          <strong> Open-source code </strong>
+        </a>
+        by Rafaela Medeiros{" "}
+      </small>
     </div>
   );
 }
