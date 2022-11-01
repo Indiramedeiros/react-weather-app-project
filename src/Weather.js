@@ -1,48 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import "./Weather.css";
 
-export default function Weather() {
-  let weatherData = {
-    city: "London",
-    temperature: "14",
-    date: "Oct 13",
-    weekDay: "Thursday",
-    hour: "20:10",
-    description: "Cloudy",
-    imgUrl: "https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png",
-    humidity: "84",
-    wind: "3",
-  };
+export default function Weather(props) {
+  const [weatherData, setWeatherData] = useState({ ready: false });
+  function handleResponse(response) {
+    setWeatherData({
+      ready: true,
+      city: response.data.city,
+      temperature: response.data.temperature.current,
+      description: response.data.condition.description,
+      humidity: response.data.temperature.humidity,
+      wind: response.data.wind.speed,
+      icon: response.data.condition.icon,
+      date: new Date(response.data.dt * 1000),
+    });
+  }
 
-  return (
-    <div className="Weather">
-      <div className="container">
+  if (weatherData.ready) {
+    return (
+      <div className="Weather">
         <div className="weather-app">
           <div className="row">
             <div className="col-4">
-              <h3>{weatherData.date}</h3>
+              <h3>10</h3>
             </div>
             <div className="col-4">
-              <h3>{weatherData.weekDay}</h3>
+              <h3>10</h3>
             </div>
             <div className="col-4">
-              <h3>{weatherData.hour}</h3>
+              <h3>10</h3>
             </div>
           </div>
           <h1>{weatherData.city}</h1>
           <div className="row">
             <div className="col-6">
-              <img src={weatherData.imgUrl} alt="clear"></img>
-              <span className="current-temp">{weatherData.temperature}</span>
+              <img src={weatherData.iconUrl} alt={weatherData.icon}></img>
+              <span className="current-temp">
+                {Math.round(weatherData.temperature)}
+              </span>
               <span className="units">
                 <a href="/">°C</a> ׀ <a href="/">°F</a>
               </span>
-              <p className="description">{weatherData.description}</p>
+              <p className="description text-capitalize">
+                {weatherData.description}
+              </p>
             </div>
             <div className="col-6">
               <ul>
                 <li>Humidity: {weatherData.humidity}%</li>
-                <li>Wind: {weatherData.wind}mph </li>
+                <li>Wind: {Math.round(weatherData.wind)} mph </li>
               </ul>
             </div>
           </div>
@@ -73,43 +80,50 @@ export default function Weather() {
           </div>
           <div className="row mt-5">
             <div className="col">
-              <img src={weatherData.imgUrl} alt="clear"></img>
+              <img src="" alt="clear"></img>
               <h3>Sat</h3>
               <h3>20°C</h3>
             </div>
             <div className="col">
-              <img src={weatherData.imgUrl} alt="clear"></img>
+              <img src="" alt="clear"></img>
               <h3>Sun</h3>
               <h3>20°C</h3>
             </div>
             <div className="col">
-              <img src={weatherData.imgUrl} alt="clear"></img>
+              <img src="" alt="clear"></img>
               <h3>Mon</h3>
               <h3>20°C</h3>
             </div>
             <div className="col">
-              <img src={weatherData.imgUrl} alt="clear"></img>
+              <img src="" alt="clear"></img>
               <h3>Tue</h3>
-              <h3>20°C</h3>
+              <h3>30°C</h3>
             </div>
             <div className="col">
-              <img src={weatherData.imgUrl} alt="clear"></img>
+              <img src="" alt="clear"></img>
               <h3>Wed</h3>
               <h3>20°C</h3>
             </div>
           </div>
         </div>
+
+        <footer className="my-link ">
+          <a
+            href="https://github.com/Indiramedeiros/react-weather-project"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <strong> Open-source code </strong>
+          </a>
+          by Rafaela Medeiros{" "}
+        </footer>
       </div>
-      <small className="my-link ">
-        <a
-          href="https://github.com/Indiramedeiros/weather-app-final"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <strong> Open-source code </strong>
-        </a>
-        by Rafaela Medeiros{" "}
-      </small>
-    </div>
-  );
+    );
+  } else {
+    const apiKey = "e3f8a050e1oa90440293852ft7d8b76a";
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${props.defaultCity}&key=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(handleResponse);
+
+    return "Loading...";
+  }
 }

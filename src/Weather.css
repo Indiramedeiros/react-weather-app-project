@@ -8,10 +8,6 @@
   font-family: "Lora", serif;
 }
 
-.Weather h1 {
-  padding: 15px;
-}
-
 .Weather li {
   list-style: none;
   font-size: 20px;
@@ -27,6 +23,7 @@
 .Weather .description {
   font-size: 20px;
 }
-.my-link {
+.Weather .my-link {
+  text-align: center;
   font-size: 18px;
 }
