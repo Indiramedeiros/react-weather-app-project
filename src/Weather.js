@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
-import CurrentlyDate from "./CurrentlyDate";
+import WeatherInfo from "./WeatherInfo";
 
 import "./Weather.css";
 
 export default function Weather(props) {
   const [weatherData, setWeatherData] = useState({ ready: false });
+  const [city, setCity] = useState(props.defaultCity);
   function handleResponse(response) {
     console.log(response.data);
     setWeatherData({
@@ -15,88 +16,83 @@ export default function Weather(props) {
       description: response.data.condition.description,
       humidity: response.data.temperature.humidity,
       wind: response.data.wind.speed,
-      icon: response.data.condition.icon,
+
+      iconUrl: `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`,
       date: new Date(response.data.time * 1000),
     });
+  }
+  function handleCityChange(event) {
+    setCity(event.target.value);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
+  }
+
+  function search() {
+    const apiKey = "e3f8a050e1oa90440293852ft7d8b76a";
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(handleResponse);
   }
 
   if (weatherData.ready) {
     return (
       <div className="Weather">
         <div className="weather-app">
-          <CurrentlyDate date={weatherData.date} />
+          <WeatherInfo data={weatherData} />
 
-          <h1>{weatherData.city}</h1>
-          <div className="row">
-            <div className="col-6">
-              <img src={weatherData.iconUrl} alt={weatherData.icon}></img>
-              <span className="current-temp">
-                {Math.round(weatherData.temperature)}
-              </span>
-              <span className="units">
-                <a href="/">°C</a> ׀ <a href="/">°F</a>
-              </span>
-              <p className="description text-capitalize">
-                {weatherData.description}
-              </p>
-            </div>
-            <div className="col-6">
-              <ul>
-                <li>Humidity: {weatherData.humidity}%</li>
-                <li>Wind: {Math.round(weatherData.wind)} mph </li>
-              </ul>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col">
-              <form>
-                <div className="form-row align-items-center">
+          <form onSubmit={handleSubmit}>
+            <div className="row d-flex ">
+              <div className="col-6">
+                <div className="form-row align-items-center ">
                   <input
                     type="text"
                     className="form-control"
                     autoFocus="on"
                     placeholder="Enter City"
+                    onChange={handleCityChange}
                   />
                 </div>
-              </form>
-            </div>
-            <button type="submit" className="btn btn-info mb-2 shadow">
-              {" "}
-              Search
-            </button>
-            <div className="col">
-              <div>
+              </div>
+              <div className="col-3">
+                <button type="submit" className="btn btn-info mb-2 shadow">
+                  Search
+                </button>
+              </div>
+              <div className="col-3 ">
                 <button type="button" className="btn btn-secondary  shadow">
                   Current
                 </button>
               </div>
             </div>
-          </div>
+          </form>
+
           <div className="row mt-5">
             <div className="col">
               <img src="" alt="clear"></img>
-              <h3>Sat</h3>
-              <h3>20°C</h3>
+              <h3>Null</h3>
+              <h3>Null</h3>
             </div>
             <div className="col">
               <img src="" alt="clear"></img>
-              <h3>Sun</h3>
-              <h3>20°C</h3>
+              <h3>Null</h3>
+              <h3>Null</h3>
             </div>
             <div className="col">
               <img src="" alt="clear"></img>
-              <h3>Mon</h3>
-              <h3>20°C</h3>
+              <h3>Null</h3>
+              <h3>Null</h3>
             </div>
             <div className="col">
               <img src="" alt="clear"></img>
-              <h3>Tue</h3>
-              <h3>30°C</h3>
+              <h3>Null</h3>
+              <h3>Null</h3>
             </div>
             <div className="col">
               <img src="" alt="clear"></img>
-              <h3>Wed</h3>
-              <h3>20°C</h3>
+              <h3>Null</h3>
+              <h3>Null</h3>
             </div>
           </div>
         </div>
@@ -114,10 +110,7 @@ export default function Weather(props) {
       </div>
     );
   } else {
-    const apiKey = "e3f8a050e1oa90440293852ft7d8b76a";
-    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${props.defaultCity}&key=${apiKey}&units=metric`;
-    axios.get(apiUrl).then(handleResponse);
-
+    search();
     return "Loading...";
   }
 }
