@@ -35,6 +35,7 @@ form {
 .Weather .units {
   position: relative;
   top: -24px;
+  left: -10px;
 }
 .Weather .description {
   font-size: 20px;
@@ -43,4 +44,8 @@ form {
 .Weather .my-link {
   text-align: center;
   font-size: 18px;
+}
+.Weather .current-button {
+  position: relative;
+  left: -70px;
 }

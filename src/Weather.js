@@ -61,9 +61,11 @@ export default function Weather(props) {
                 </button>
               </div>
               <div className="col-3 ">
-                <button type="button" className="btn btn-secondary  shadow">
-                  Current
-                </button>
+                <div className="current-button">
+                  <button type="button" className="btn btn-secondary  shadow">
+                    Current
+                  </button>
+                </div>
               </div>
             </div>
           </form>
