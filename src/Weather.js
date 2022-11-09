@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import WeatherInfo from "./WeatherInfo";
-
+import Forecast from "./Forecast";
 import "./Weather.css";
 
 export default function Weather(props) {
@@ -69,46 +69,18 @@ export default function Weather(props) {
               </div>
             </div>
           </form>
-
-          <div className="row mt-5">
-            <div className="col">
-              <img src="" alt="clear"></img>
-              <h3>Null</h3>
-              <h3>Null</h3>
-            </div>
-            <div className="col">
-              <img src="" alt="clear"></img>
-              <h3>Null</h3>
-              <h3>Null</h3>
-            </div>
-            <div className="col">
-              <img src="" alt="clear"></img>
-              <h3>Null</h3>
-              <h3>Null</h3>
-            </div>
-            <div className="col">
-              <img src="" alt="clear"></img>
-              <h3>Null</h3>
-              <h3>Null</h3>
-            </div>
-            <div className="col">
-              <img src="" alt="clear"></img>
-              <h3>Null</h3>
-              <h3>Null</h3>
-            </div>
-          </div>
+          <Forecast />
+          <footer className="my-link ">
+            <a
+              href="https://github.com/Indiramedeiros/react-weather-project"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <strong> Open-source code </strong>
+            </a>
+            by Rafaela Medeiros{" "}
+          </footer>
         </div>
-
-        <footer className="my-link ">
-          <a
-            href="https://github.com/Indiramedeiros/react-weather-project"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <strong> Open-source code </strong>
-          </a>
-          by Rafaela Medeiros{" "}
-        </footer>
       </div>
     );
   } else {
