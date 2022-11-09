@@ -61,13 +61,6 @@ export default function Weather(props) {
                   Search
                 </button>
               </div>
-              <div className="col-3 ">
-                <div className="current-button">
-                  <button type="button" className="btn btn-secondary  shadow">
-                    Current
-                  </button>
-                </div>
-              </div>
             </div>
           </form>
           <Forecast coordinates={weatherData.coordinates} />
