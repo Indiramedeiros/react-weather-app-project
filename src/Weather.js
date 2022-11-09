@@ -11,6 +11,7 @@ export default function Weather(props) {
     console.log(response.data);
     setWeatherData({
       ready: true,
+      coordinates: response.data.coordinates,
       city: response.data.city,
       temperature: response.data.temperature.current,
       description: response.data.condition.description,
@@ -69,7 +70,7 @@ export default function Weather(props) {
               </div>
             </div>
           </form>
-          <Forecast />
+          <Forecast coordinates={weatherData.coordinates} />
           <footer className="my-link ">
             <a
               href="https://github.com/Indiramedeiros/react-weather-project"
